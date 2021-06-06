@@ -143,7 +143,7 @@ void states() {
   doc["amps"] = power.amps;
   doc["watts"] = power.watts;
   doc["kWh"] = power.kWh;
-  doc["uptime"] = power.uptime;
+  doc["uptime"] = power.uptime; 
   String output;
   serializeJson(doc, output);
   server.send(200, "application/json", output);

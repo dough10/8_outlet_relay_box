@@ -2,8 +2,8 @@
 #define DATA_h
 
 #ifndef STASSID
-  #define STASSID ""
-  #define STAPSK  ""
+  #define STASSID "ssid"
+  #define STAPSK  "password"
 #endif
 
 #endif

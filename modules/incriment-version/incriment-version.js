@@ -6,7 +6,7 @@
  * @requires version-incrimenter
  * @requires package.json
  * @example <caption>Example usage of incriment-version.js file.</caption>
- * node modules/incriment-version
+ * node modules/incriment-version/incriment-version.js
  */
 
 const fs = require('fs');                                 // work with the file system

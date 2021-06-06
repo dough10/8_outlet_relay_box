@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dough10/8_outlet_relay_box/issues"
   },
-  "homepage": "https://github.com/dough10/8_outlet_relay_box#readme"
+  "homepage": "https://github.com/dough10/8_outlet_relay_box#readme",
+  "dependencies": {
+    "jsdoc-to-markdown": "^7.0.1"
+  }
 }

@@ -7,5 +7,5 @@ incriment the version number of the package.json file
 **Author**: Jimmy Doughten <https://github.com/dough10>  
 **Example** *(Example usage of incriment-version.js file.)*  
 ```js
-node modules/incriment-version
+node modules/incriment-version/incriment-version.js
 ```

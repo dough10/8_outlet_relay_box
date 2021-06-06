@@ -6,6 +6,7 @@ if [ "$2" == "+" ]
     v=$(node -p "require('./package.json').version");
 fi
 echo "$1, V: $v";
+node make-docs
 git add .;
 git commit -m "$1, V: $v";
 git push;

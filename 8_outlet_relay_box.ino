@@ -64,7 +64,6 @@ class Power {
       total += watts;
       kWh = (total * hours) / 1000;
       if (Serial) {
-        Serial.println(bootTime);
         Serial.println();
 
         Serial.print("uptime: ");

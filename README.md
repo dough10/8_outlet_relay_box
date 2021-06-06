@@ -11,7 +11,7 @@ Wemos D1 mini controlled 8 relay board w/ acs712 for power reading
 
 1. clone repo `git clone https://github.com/dough10/8_outlet_relay_box.git`
 2. cd into directory `cd 8_outlet_relay_box`
-3. install modules `npm install`
+3. install modules `npm install` (only needed to update docs & readme)
 4. modify config.h with your wifi credentials
 5. modify defined RELAY namespaces in 8_outlet_relay_box.ino to fit your project pin numbers
 6. flash 8_outlet_relay_box.ino on Wemos D1 Mini
@@ -25,8 +25,8 @@ Wemos D1 mini controlled 8 relay board w/ acs712 for power reading
 
 ## Dependencies
 
-- jsdoc-to-markdown: ^7.0.1
+No Dependencies
 
 ## Dev Dependencies
 
-  No Dev Dependencies
+- jsdoc-to-markdown: ^7.0.1

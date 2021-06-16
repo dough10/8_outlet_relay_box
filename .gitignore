@@ -1,2 +1,9 @@
 /.vscode/
 /node_modules/
+/removed/
+/assets/
+/modules/
+make-docs.js
+package-lock.json
+packsge.json
+push.sh

@@ -16,11 +16,4 @@ Wemos D1 mini controlled 8 relay board w/ acs712 for power reading
 - "ip address/1" toggles relay1 (1 - 8) also returns device states
 - "ip address/1/on" turn on relay1 (1 - 8) also returns device states
 - "ip address/1/off" turn off relay1 (1 - 8) also returns device states
-
-## NPM Dependencies
-
-No Dependencies
-
-## NPM Dev Dependencies
-
-- jsdoc-to-markdown: ^7.0.1
+}

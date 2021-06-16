@@ -5,5 +5,5 @@
 /modules/
 make-docs.js
 package-lock.json
-packsge.json
+package.json
 push.sh

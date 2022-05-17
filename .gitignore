@@ -7,3 +7,4 @@ make-docs.js
 package-lock.json
 package.json
 push.sh
+config.h

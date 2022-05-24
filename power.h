@@ -3,9 +3,7 @@
 
 #include <ACS712.h>
 
-const int numReadings = 5;
-
-ACS712  ACS(A0, 3.3, 1023, 100);
+ACS712  ACS(A0, 5.0, 1023, 100);
 
 class Power {
   public:
@@ -27,10 +25,24 @@ class Power {
 
     void takeReading() {
       unsigned long startTime = millis();
-      uptime = millis() - bootTime;
       if (startTime - lastRan < looptime) {
         return;
       }
+      read(startTime);
+      lastRan = startTime;
+    }
+
+  private:
+    static const int numReadings = 5;
+    int readings[numReadings];
+    int readIndex = 0;    
+    long pool = 0; 
+    unsigned long total = 0;
+    const long looptime = 5000;
+    unsigned long lastRan = millis();
+
+    void read(unsigned long mills) {
+      uptime = mills;
       double hours = uptime / 1000.0 /60.0 /60.0;
       pool = pool - readings[readIndex];
       readings[readIndex] = ACS.mA_AC();
@@ -44,11 +56,13 @@ class Power {
       watts = amps * 120.0;
       total += watts;
       kWh = (total * hours) / 1000;
-      lastRan = startTime;
       if (!Serial) {
         return;
       }
       Serial.println();
+
+      Serial.print("last mA reading: ");
+      Serial.println(readings[readIndex]);
 
       Serial.print("uptime: ");
       Serial.println(uptime);
@@ -68,15 +82,6 @@ class Power {
       Serial.print("kWh: ");
       Serial.println(kWh,3);
     }
-
-  private:
-    const unsigned long bootTime = millis();
-    int readings[numReadings];
-    int readIndex = 0;    
-    long pool = 0; 
-    unsigned long total = 0;
-    const long looptime = 5000;
-    unsigned long lastRan = bootTime - looptime;
 };
 
 #endif

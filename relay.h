@@ -21,6 +21,10 @@ class Relay {
     void toggle() {
       digitalWrite(pin, !digitalRead(pin));
     }
+
+    void setState(bool state) {
+      digitalWrite(pin, state);
+    }
 };
 
 #endif

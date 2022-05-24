@@ -35,7 +35,6 @@ class webServer {
       Serial.begin(115200);
       Serial.println("");
       Serial.println(__FILE__);
-      power.init();
       WiFi.mode(WIFI_STA);
       WiFi.begin(ssid, password);
       while (WiFi.status() != WL_CONNECTED) {
@@ -47,7 +46,6 @@ class webServer {
       Serial.println(ssid);
       Serial.print("IP address: ");
       Serial.println(WiFi.localIP());
-
       if (MDNS.begin("esp8266")) {
         Serial.println("MDNS responder started");
       }
@@ -69,11 +67,10 @@ class webServer {
           states();
         });
       }
-
       server.onNotFound(fourohfour);
-
       server.begin();
       Serial.println("HTTP server started");
+      power.init();
     };
 
     void update() {
@@ -86,8 +83,8 @@ class webServer {
   private:
     static const int num_relays = sizeof(Relays);
 
-    static void states() {
-      StaticJsonDocument<212> doc;
+    static String json() {
+      StaticJsonDocument<384> doc;
       for (int i = 0; i < num_relays; i++) {
         doc[String(i + 1)] = !digitalRead(Relays[i].pin);
       }
@@ -95,9 +92,15 @@ class webServer {
       doc["watts"] = power.watts;
       doc["kWh"] = power.kWh;
       doc["uptime"] = power.uptime; 
+      doc["network"] = ssid;
+      doc["address"] = WiFi.localIP();
       String output;
       serializeJson(doc, output);
-      server.send(200, "application/json", output);
+      return output;
+    }
+
+    static void states() {
+      server.send(200, "application/json", json());
     }
 
     static void fourohfour() {

@@ -7,8 +7,6 @@ ACS712  ACS(A0, 5.0, 1023, 100);
 
 class Power {
   public:
-    unsigned long uptime = 0;
-
     void init() {
       for (int thisReading = 0; thisReading < numReadings; thisReading++) {
         readings[thisReading] = 0;
@@ -41,6 +39,10 @@ class Power {
       return _kWh;
     }
 
+    unsigned long uptime() {
+      return _uptime;
+    }
+
   private:
     static const int numReadings = 5;
     int readings[numReadings];
@@ -52,10 +54,11 @@ class Power {
     float _amps;
     float _watts;
     float _kWh; 
+    unsigned long _uptime = 0;
 
     void read(unsigned long mills) {
-      uptime = mills;
-      double hours = uptime / 1000.0 /60.0 /60.0;
+      _uptime = mills;
+      double hours = _uptime / 1000.0 /60.0 /60.0;
       pool = pool - readings[readIndex];
       readings[readIndex] = ACS.mA_AC();
       pool = pool + readings[readIndex];
@@ -77,7 +80,7 @@ class Power {
       Serial.println(readings[readIndex]);
 
       Serial.print("uptime: ");
-      Serial.println(uptime);
+      Serial.println(uptime());
 
       Serial.print("hours: ");
       Serial.println(hours,3);

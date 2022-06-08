@@ -22,8 +22,8 @@ class Relay {
       digitalWrite(pin, !digitalRead(pin));
     }
 
-    void setState(bool state) {
-      digitalWrite(pin, state);
+    boolean getState() {
+      return !digitalRead(pin);
     }
 };
 

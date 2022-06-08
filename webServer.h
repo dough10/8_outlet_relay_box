@@ -86,12 +86,12 @@ class webServer {
     static String json() {
       StaticJsonDocument<384> doc;
       for (int i = 0; i < num_relays; i++) {
-        doc[String(i + 1)] = !digitalRead(Relays[i].pin);
+        doc[String(i + 1)] = Relays[i].getState();
       }
       doc["amps"] = power.amps();
       doc["watts"] = power.watts();
       doc["kWh"] = power.kWh();
-      doc["uptime"] = power.uptime; 
+      doc["uptime"] = power.uptime(); 
       doc["network"] = ssid;
       doc["address"] = WiFi.localIP();
       String output;

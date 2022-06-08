@@ -8,9 +8,6 @@ ACS712  ACS(A0, 5.0, 1023, 100);
 class Power {
   public:
     unsigned long uptime = 0;
-    float amps;
-    float watts;
-    float kWh; 
 
     void init() {
       for (int thisReading = 0; thisReading < numReadings; thisReading++) {
@@ -32,6 +29,18 @@ class Power {
       lastRan = startTime;
     }
 
+    float amps() {
+      return _amps;
+    }
+
+    float watts() {
+      return _watts;
+    }
+
+    float kWh() {
+      return _kWh;
+    }
+
   private:
     static const int numReadings = 5;
     int readings[numReadings];
@@ -40,6 +49,9 @@ class Power {
     unsigned long total = 0;
     const long looptime = 5000;
     unsigned long lastRan = millis();
+    float _amps;
+    float _watts;
+    float _kWh; 
 
     void read(unsigned long mills) {
       uptime = mills;
@@ -52,10 +64,10 @@ class Power {
         readIndex = 0;
       }
       float mA = pool / numReadings;
-      amps = mA / 1000;
-      watts = amps * 120.0;
-      total += watts;
-      kWh = (total * hours) / 1000;
+      _amps = mA / 1000;
+      _watts = _amps * 120.0;
+      total += _watts;
+      _kWh = (total * hours) / 1000;
       if (!Serial) {
         return;
       }
@@ -74,13 +86,13 @@ class Power {
       Serial.println(mA,3);
 
       Serial.print("amps: ");
-      Serial.println(amps,3);
+      Serial.println(amps(),3);
 
       Serial.print("watts: ");
-      Serial.println(watts,3);
+      Serial.println(watts(),3);
 
       Serial.print("kWh: ");
-      Serial.println(kWh,3);
+      Serial.println(kWh(),3);
     }
 };
 
